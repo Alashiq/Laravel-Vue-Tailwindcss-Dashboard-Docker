@@ -13,10 +13,13 @@
 <body style="background-color:#f5f6fa;">
 
     <div id="app" dir="rtl">
-        admin
-        <hello-world/>
-
-        {{-- <router-view></router-view> --}}
+        
+        <router-link to="/">Go to Home</router-link>
+        <div class="w-20"></div>
+        <router-link to="/about">Go to About</router-link>
+        <br>
+        <br>
+        <router-view></router-view>
     </div>
 
 
