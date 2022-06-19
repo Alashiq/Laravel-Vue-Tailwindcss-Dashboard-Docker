@@ -14,9 +14,9 @@
 
     <div id="app" dir="rtl">
         
-        <router-link to="/">Go to Home</router-link>
+        <router-link to="/admin">Go to Home</router-link>
         <div class="w-20"></div>
-        <router-link to="/about">Go to About</router-link>
+        <router-link to="/admin/about">Go to About</router-link>
         <br>
         <br>
         <router-view></router-view>
