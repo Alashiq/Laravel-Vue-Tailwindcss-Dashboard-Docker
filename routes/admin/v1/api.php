@@ -18,13 +18,14 @@ Route::get('/notAuth', function (Request $request) {
 Route::controller(AuthControllerAdmin::class)->prefix('auth')->group(function () {
     Route::post('/signup', 'store');
     Route::post('/login', 'login');
+
+
 });
     # # # # # # # # # # # # # # # End Admin Not Auth # # # # # # # # # # # # # # # 
 
 
+    Route::middleware(['auth:sanctum', 'type.admin'])->group(function () {
 
-        Route::get('/', function(){
-            return 'hello';
-        })->middleware(['auth:sanctum', 'type.admin']);
-        
-  
+    Route::get('/', [AuthControllerAdmin::class, 'index'])->middleware('check.role:DeleteMessage');
+
+});
