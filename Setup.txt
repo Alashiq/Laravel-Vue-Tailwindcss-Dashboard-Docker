@@ -1,2 +1,4 @@
 ##1=> To Run "php artisan" 
 ./vendor/bin/sail artisan  
+
+d
