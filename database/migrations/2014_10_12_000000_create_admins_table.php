@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('first_name');
             $table->string('last_name');
+            $table->integer('role_id');
             $table->string('photo')->default('/storage/assets/avatar.png');
             $table->integer('state')->default(0); //1 => Active , 0 =>NAN Active , 2=>Banned
             $table->rememberToken();

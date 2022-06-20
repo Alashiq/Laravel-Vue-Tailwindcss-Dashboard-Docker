@@ -13,13 +13,13 @@ Route::get('/notAuth', function (Request $request) {
 });
 
 
+    # # # # # # # # # # # # # # # Admin Not Auth # # # # # # # # # # # # # # # 
 
-    # # # # # # # # # # # # # # # Auth # # # # # # # # # # # # # # # 
-    Route::group(['prefix' => 'auth'], function () {
-        Route::post('/signup', [AuthControllerAdmin::class, 'store']);
-       Route::post('/login', [AuthControllerAdmin::class, 'login']);
-    });
-    # # # # # # # # # # # # # # # End Auth # # # # # # # # # # # # # # # 
+Route::controller(AuthControllerAdmin::class)->prefix('auth')->group(function () {
+    Route::post('/signup', 'store');
+    Route::post('/login', 'login');
+});
+    # # # # # # # # # # # # # # # End Admin Not Auth # # # # # # # # # # # # # # # 
 
 
 
