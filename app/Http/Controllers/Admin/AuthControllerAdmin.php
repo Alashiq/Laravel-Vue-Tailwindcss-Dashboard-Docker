@@ -1,17 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Resources\AdminResource;
 
 class AuthControllerAdmin extends Controller
 {
     
-
+public function index(Request $request){
+    return $request->user()->role;
+    return 'hello';
+}
 
     // Add New Admin
     public function store(Request $request)
@@ -37,7 +41,7 @@ class AuthControllerAdmin extends Controller
     // Login Admin
     public function login(Request $request)
     {
-        $admin = Admin::where('phone', $request->phone)->first();
+        $admin = Admin::with('role')->where('phone', $request->phone)->first();
 
         if (!$admin || !Hash::check($request->password, $admin->password)) {
 
@@ -49,20 +53,11 @@ class AuthControllerAdmin extends Controller
         } elseif ($admin->state == 2)
             return response()->json(['success' => false, 'message' => 'هذا الحساب محظور ولا يمكن استخدامه مجددا'], 400);
 
-
-
+            $admin->token=$admin->createToken('website', ['role:admin'])->plainTextToken;
         return response()->json([
             'success' => true,
             'message' => 'تم تسجيل الدخول بنجاح',
-            'user' => [
-                'id' => $admin->id,
-                'phone' => $admin->phone,
-                'first_name' => $admin->first_name,
-                'last_name' => $admin->last_name,
-                'photo' => $admin->photo,
-                'token' => $admin->createToken('website', ['role:admin'])->plainTextToken
-
-            ],
+            'user' => new AdminResource($admin),
         ]);
     }
 
