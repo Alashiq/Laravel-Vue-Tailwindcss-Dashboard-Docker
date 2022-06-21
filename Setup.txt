@@ -1,4 +1,5 @@
 ##1=> To Run "php artisan" 
 ./vendor/bin/sail artisan  
 
-d
+##2=> Create Admin and Role
+./vendor/bin/sail artisan   db:seed
